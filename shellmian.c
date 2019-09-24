@@ -59,7 +59,7 @@ void execute(char **command)
   if(strcmp(command[0], "chdir") == 0){
     printf("cd");
   }
-	else if(strcmp(command[0], "list") == 0){
+else if(strcmp(command[0], "list") == 0){
     printf("ls");
   }
   else if(strcmp(command[0], "history") == 0){
@@ -73,6 +73,8 @@ void execute(char **command)
   }
   else if(strcmp(command[0], "run") == 0){
     printf("run");
+  }else if (strcmp(command[0], "exit") == 0)){	
+	exit(0);	  
   }else{
     printf("command doese not exist.\n");
   }
