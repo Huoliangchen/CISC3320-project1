@@ -25,7 +25,6 @@ int main()
 			printf("%d is %s \n", i,command[i]);
 			i++;
 		}
-    free(command);
 	}
 	
 	return 0;
