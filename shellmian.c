@@ -15,6 +15,7 @@ int main()
 	
 	while(state)
 	{
+		printf("Myshell> ")
 		fgets(input, MAX, stdin);
 		command = commandSplit(input);
 		
@@ -22,7 +23,7 @@ int main()
 		
 		while(command[i])
 		{
-			printf("%d is %s \n", i,command[i]);
+			printf("%d is %s ", i,command[i]);
 			i++;
 		}
 	}
