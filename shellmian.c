@@ -73,7 +73,7 @@ else if(strcmp(command[0], "list") == 0){
                         exit(1);
                 }
         }else {
-                waitpid(pid, &status, WUNTRACED);
+                wait(NULL);
                 }
 
   }
