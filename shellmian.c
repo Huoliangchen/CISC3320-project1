@@ -90,7 +90,7 @@ else if(strcmp(command[0], "list") == 0){
   }
   else if(strcmp(command[0], "run") == 0){
     printf("run");
-  }else if (strcmp(command[0], "exit") == 0)){	
+  }else if (strcmp(command[0], "exit") == 0){	
 	exit(0);	  
   }else{
     printf("command doese not exist.\n");
