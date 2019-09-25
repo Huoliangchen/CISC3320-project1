@@ -11,7 +11,7 @@ int main()
 {
 	char input[MAX];
 	char **command;
-	int status = 1;
+	int status;
 	
 	char *commandBuiltins[] = {"list", "history", "printwd", "chdir", "complie", "run", "\0"};
 	
