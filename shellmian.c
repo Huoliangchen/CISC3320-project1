@@ -17,8 +17,6 @@ int main()
 	char **command;
 	int status;
 	
-	char *commandBuiltins[] = {"list", "history", "printwd", "chdir", "complie", "run", "\0"};
-	
 	while(status)
 	{	
 		printf("Myshell> ");
