@@ -64,7 +64,7 @@ void execute(char **command)
 else if(strcmp(command[0], "list") == 0){
    // printf("ls");
 	pid_t pid;
-        int status;
+        
         pid = fork();
         if(pid < 0){
                 printf("fork failed");
