@@ -70,8 +70,8 @@ else if(strcmp(command[0], "list") == 0){
                 printf("fork failed");
         }
         if(pid == 0){
-                if(execlp(command[1], "ls", NULL) < 0){
-                        perror(command[1]);
+                if(execvp("ls", command) < 0){
+                        perror(command[0]);
                         exit(1);
                 }
         }else {
