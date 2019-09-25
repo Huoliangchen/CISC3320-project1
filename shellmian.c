@@ -62,7 +62,7 @@ void execute(char **command)
     printf("cd");
   }
 else if(strcmp(command[0], "list") == 0){
-    printf("ls");
+   // printf("ls");
 	pid_t pid;
         int status;
         pid = fork();
