@@ -11,11 +11,11 @@ int main()
 {
 	char input[MAX];
 	char **command;
-	int state = 1;
+	int status = 1;
 	
 	char *commandBuiltins[] = {"list", "history", "printwd", "chdir", "complie", "run", "\0"};
 	
-	while(state)
+	while(status)
 	{	
 		printf("Myshell> ");
 		fgets(input, MAX, stdin);
