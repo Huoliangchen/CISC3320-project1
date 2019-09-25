@@ -83,7 +83,21 @@ else if(strcmp(command[0], "list") == 0){
     printf("his");
   }
   else if(strcmp(command[0], "printwd") == 0){
-    printf("wd");
+    // printf("wd");
+	pid_t pid;
+        
+        pid = fork();
+        if(pid < 0){
+                printf("fork failed");
+        }
+        if(pid == 0){
+                if(execvp("pwd", command) < 0){
+                        perror(command[0]);
+                        exit(1);
+                }
+        }else {
+                wait(NULL);
+                }
   }
   else if(strcmp(command[0], "complie") == 0){
     printf("complie");
