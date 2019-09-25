@@ -61,6 +61,21 @@ void execute(char **command)
   }
 else if(strcmp(command[0], "list") == 0){
     printf("ls");
+	pid_t pid;
+        int status;
+        pid = fork();
+        if(pid < 0){
+                printf("fork failed");
+        }
+        if(pid == 0){
+                if(execlp(command[1], "ls", NULL) < 0){
+                        perror(command[1]);
+                        exit(1);
+                }
+        }else {
+                waitpid(pid, &status, WUNTRACED);
+                }
+
   }
   else if(strcmp(command[0], "history") == 0){
     printf("his");
