@@ -59,7 +59,12 @@ char **commandSplit(char *input)
 void execute(char **command)
 { 
   if(strcmp(command[0], "chdir") == 0){
-    printf("cd");
+    //printf("cd");
+	if(command[2] != NULL){
+		printf("too many arguments.\n");
+	}else if(chdir(command[1]) < 0){
+		perror(command[1]);
+	}
   }
 else if(strcmp(command[0], "list") == 0){
    // printf("ls");
