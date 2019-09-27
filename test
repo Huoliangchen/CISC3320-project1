@@ -104,7 +104,7 @@ else if(strcmp(command[0], "list") == 0){
                 wait(NULL);
                 }
   }
-  else if(strcmp(command[0], "complie") == 0){
+  else if(strcmp(command[0], "gcc") == 0){
     	pid_t pid;
         
         pid = fork();
