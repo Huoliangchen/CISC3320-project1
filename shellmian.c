@@ -16,10 +16,11 @@ int main()
 	char input[MAX];
 	char **command;
 	int status;
+	int path[MAX];
 	
 	while(status)
-	{	
-		printf("Myshell> ");
+	{	getcwd(path, sizeof(path));
+		printf("Myshell>%s$ ", path);
 		fgets(input, MAX, stdin);
     if(input[strlen(input) - 1] == '\n')
           input[strlen(input) - 1] = '\0';
