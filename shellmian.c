@@ -20,7 +20,9 @@ int main()
 	
 	while(status)
 	{	getcwd(path, sizeof(path));
-		printf("Myshell>%s$ ", path);
+		printf("\033[1;32mMyshell>");
+	 	printf("\033[1;34%s", path);
+	 	printf("\033[0m$ ");
 		fgets(input, MAX, stdin);
     if(input[strlen(input) - 1] == '\n')
           input[strlen(input) - 1] = '\0';
