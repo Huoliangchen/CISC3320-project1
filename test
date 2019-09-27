@@ -59,7 +59,12 @@ char **commandSplit(char *input)
 void execute(char **command)
 { 
   if(strcmp(command[0], "chdir") == 0){
-    printf("cd");
+    //printf("cd");
+	if(command[2] != NULL){
+		printf("too many arguments.\n");
+	}else if(chdir(command[1]) < 0){
+		perror(command[1]);
+	}
   }
 else if(strcmp(command[0], "list") == 0){
    // printf("ls");
@@ -100,10 +105,37 @@ else if(strcmp(command[0], "list") == 0){
                 }
   }
   else if(strcmp(command[0], "complie") == 0){
-    printf("complie");
+    	pid_t pid;
+        
+        pid = fork();
+        if(pid < 0){
+                printf("fork failed");
+        }
+        if(pid == 0){
+                if(execvp("gcc", command) < 0){
+                        perror(command[0]);
+                        exit(1);
+                }
+        }else {
+                wait(NULL);
+                }
   }
-  else if(strcmp(command[0], "run") == 0){
-    printf("run");
+  else if(strcmp(command[0], "./a.out") == 0){
+    //printf("run");
+	pid_t pid;
+        
+        pid = fork();
+        if(pid < 0){
+                printf("fork failed");
+        }
+        if(pid == 0){
+                if(execl("./a.out", "a.out", NULL) < 0){
+                        perror(command[0]);
+                        exit(1);
+                }
+        }else {
+                wait(NULL);
+                }
   }else if (strcmp(command[0], "exit") == 0){	
 	exit(0);	  
   }else{
