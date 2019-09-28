@@ -9,12 +9,14 @@
 
 
 char **commandSplit(char []);
-void execute(char **);
+void execute(char **, char*[], int);
 
 int main()
 {
 	char input[MAX];
 	char **command;
+	char *history[MAX];
+	int historycount = 0;
 	int status;
 	int path[MAX];
 	
@@ -26,13 +28,16 @@ int main()
 		fgets(input, MAX, stdin);
     if(input[strlen(input) - 1] == '\n')
           input[strlen(input) - 1] = '\0';
-
+    if(input != NULL){
+	history[historycount] = strdup(input);
+    	historycount++;
+    }
 		command = commandSplit(input);
     if (!command[0]) {
             continue;
         }
         
-		execute(command);
+		execute(command, history, historycount);
 	}
 	
 	return 0;
@@ -59,7 +64,7 @@ char **commandSplit(char *input)
 	return command;
 }
 
-void execute(char **command)
+void execute(char **command, char *history[], int historycount)
 { 
   if(strcmp(command[0], "chdir") == 0){
     //printf("cd");
@@ -87,8 +92,18 @@ else if(strcmp(command[0], "list") == 0){
                 }
 
   }
-  else if(strcmp(command[0], "history") == 0){
-    printf("his");
+  else if(strcmp(command[0], "history") == 0 && command[1] == NULL){
+    //printf("his");
+	  if(history[0] == NULL){
+	  	printf("No history.\n");
+	  }else{
+	  	int index = 0;
+		for(int i = 0; i < historycount; i++0)
+		{
+			index = i+1;
+			printf("%d %s\n", index, history[i]);
+		}
+	  }
   }
   else if(strcmp(command[0], "printwd") == 0){
     // printf("wd");
