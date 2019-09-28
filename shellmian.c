@@ -34,7 +34,7 @@ int main()
 	{	
 		getcwd(path, sizeof(path));
 		printf("\033[1;32mMyshell>");
-		printf("\033[1;34%s", path);
+		printf("\033[1;34m%s", path);
 		printf("\033[0m$ ");
 	 
 		fgets(input, MAX, stdin);
