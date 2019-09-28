@@ -20,17 +20,18 @@ int main()
 	int status;
 	char path[MAX];
 	
+	printf("/**************************************************************/\n");
+	printf("                 WELCOME TO MY SHELL!\n");
+	printf("use command list to list files and directory of a given directory;\n");
+	printf("use command history to list commands entered in the past;\n");
+	printf("use command printwd to print current working directory;\n");
+	printf("use command chdir to change to a given directory;\n");
+	printf("use command gcc to complie;\n");
+	printf("use command ./a.out to run.\n");
+	printf("/**************************************************************/\n");
+	
 	while(status)
 	{	
-		printf("/**************************************************************/\n");
-		printf("                 WELCOME TO MY SHELL!\n");
-		printf("use command list to list files and directory of a given directory;\n");
-		printf("use command history to list commands entered in the past;\n");
-		printf("use command printwd to print current working directory;\n");
-		printf("use command chdir to change to a given directory;\n");
-		printf("use command gcc to complie;\n");
-		printf("use command ./a.out to run.\n");
-		printf("/**************************************************************/\n");
 		getcwd(path, sizeof(path));
 		printf("\033[1;32mMyshell>");
 		printf("\033[1;34%s", path);
