@@ -18,7 +18,7 @@ int main()
 	char *history[MAX];
 	int historycount = 0;
 	int status;
-	int path[MAX];
+	char path[MAX];
 	
 	while(status)
 	{	getcwd(path, sizeof(path));
@@ -28,7 +28,8 @@ int main()
 		fgets(input, MAX, stdin);
     if(input[strlen(input) - 1] == '\n')
           input[strlen(input) - 1] = '\0';
-    if(input != NULL){
+
+    if(input[0] != '\0' && input[0] != ' '){
 	history[historycount] = strdup(input);
     	historycount++;
     }
@@ -98,7 +99,7 @@ else if(strcmp(command[0], "list") == 0){
 	  	printf("No history.\n");
 	  }else{
 	  	int index = 0;
-		for(int i = 0; i < historycount; i++0)
+		for(int i = 0; i < historycount; i++)
 		{
 			index = i+1;
 			printf("%d %s\n", index, history[i]);
