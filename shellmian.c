@@ -24,12 +24,12 @@ int main()
 	{	
 		printf("/**************************************************************/\n");
 		printf("                 WELCOME TO MY SHELL!\n");
-		printf("use command list to list files and directory of a given directory;");
-		printf("use command history to list commands entered in the past;");
-		printf("use command printwd to print current working directory;");
-		printf("use command chdir to change to a given directory;");
-		printf("use command gcc to complie;");
-		printf("use command ./a.out to run.");
+		printf("use command list to list files and directory of a given directory;\n");
+		printf("use command history to list commands entered in the past;\n");
+		printf("use command printwd to print current working directory;\n");
+		printf("use command chdir to change to a given directory;\n");
+		printf("use command gcc to complie;\n");
+		printf("use command ./a.out to run.\n");
 		printf("/**************************************************************/\n");
 		getcwd(path, sizeof(path));
 		printf("\033[1;32mMyshell>");
