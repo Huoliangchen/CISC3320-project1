@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #define MAX 50
 
-void showshell();
+
 char **commandSplit(char []);
 void execute(char **, char*[], int);
 
@@ -22,7 +22,19 @@ int main()
 	
 	while(status)
 	{	
-		showshell();
+		printf("/**************************************************************/\n");
+		printf("                 WELCOME TO MY SHELL!\n");
+		printf("use command list to list files and directory of a given directory;");
+		printf("use command history to list commands entered in the past;");
+		printf("use command printwd to print current working directory;");
+		printf("use command chdir to change to a given directory;");
+		printf("use command gcc to complie;");
+		printf("use command ./a.out to run.");
+		printf("/**************************************************************/\n");
+		getcwd(path, sizeof(path));
+		printf("\033[1;32mMyshell>");
+		printf("\033[1;34%s", path);
+		printf("\033[0m$ ");
 	 
 		fgets(input, MAX, stdin);
    		if(input[strlen(input) - 1] == '\n')
@@ -41,23 +53,6 @@ int main()
 	}
 	
 	return 0;
-}
-
-void showshell()
-{
-	printf("/**************************************************************/\n");
-	printf("                 WELCOME TO MY SHELL!\n");
-	printf("use command list to list files and directory of a given directory;");
-	printf("use command history to list commands entered in the past;");
-	printf("use command printwd to print current working directory;");
-	printf("use command chdir to change to a given directory;");
-	printf("use command gcc to complie;");
-	printf("use command ./a.out to run.");
-	printf("/**************************************************************/\n");
-	getcwd(path, sizeof(path));
-	printf("\033[1;32mMyshell>");
-	printf("\033[1;34%s", path);
-	printf("\033[0m$ ");
 }
 
 char **commandSplit(char *input)
