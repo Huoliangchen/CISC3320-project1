@@ -8,8 +8,8 @@
 #define MAX 50
 
 
-char **commandSplit(char []);
-void execute(char **, char*[], int);
+char **commandSplit(char []);           //function to split char into word.
+void execute(char **, char*[], int);    //function that the shell have
 
 int main()
 {
@@ -20,7 +20,7 @@ int main()
 	int status;
 	char path[MAX];
 	
-	printf("/**************************************************************/\n");
+	printf("/**************************************************************/\n");     //print function command
 	printf("                 WELCOME TO MY SHELL!\n");
 	printf("use command list to list files and directory of a given directory;\n");
 	printf("use command history to list commands entered in the past;\n");
@@ -32,22 +32,22 @@ int main()
 	
 	while(status)
 	{	
-		getcwd(path, sizeof(path));
+		getcwd(path, sizeof(path));                                         //show current working directory
 		printf("\033[1;32mMyshell>");
 		printf("\033[1;34m%s", path);
 		printf("\033[0m$ ");
 	 
-		fgets(input, MAX, stdin);
-   		if(input[strlen(input) - 1] == '\n')
+		fgets(input, MAX, stdin);				//get input from user
+   		if(input[strlen(input) - 1] == '\n')			// try to get rid of "\n" that fgets keep.
           	input[strlen(input) - 1] = '\0';
-
-    		if(input[0] != '\0' && input[0] != ' '){
+	
+    		if(input[0] != '\0' && input[0] != ' '){               //if input is not null or space, add to history
 		history[historycount] = strdup(input);
     		historycount++;
     		}
 		
-		command = commandSplit(input);
-		if (!command[0]) {
+		command = commandSplit(input);			//change char arrry to a word array.
+		if (!command[0]) {				//if command is empty, skip it.
             		continue;
 		}
         	execute(command, history, historycount);
@@ -79,16 +79,16 @@ char **commandSplit(char *input)
 
 void execute(char **command, char *history[], int historycount)
 { 
-  if(strcmp(command[0], "chdir") == 0){
-    //printf("cd");
-	if(command[2] != NULL){
+  if(strcmp(command[0], "chdir") == 0){                          //function to change directory
+	
+	  if(command[2] != NULL){                               //only accept one arguments
 		printf("too many arguments.\n");
-	}else if(chdir(command[1]) < 0){
+	  }else if(chdir(command[1]) < 0){
 		perror(command[1]);
 	}
   }
-else if(strcmp(command[0], "list") == 0){
-   // printf("ls");
+else if(strcmp(command[0], "list") == 0){                  //function to list files or directories of a giving directroy.
+   
 	pid_t pid;
         
         pid = fork();
@@ -105,8 +105,8 @@ else if(strcmp(command[0], "list") == 0){
                 }
 
   }
-  else if(strcmp(command[0], "history") == 0 && command[1] == NULL){
-    //printf("his");
+  else if(strcmp(command[0], "history") == 0 && command[1] == NULL){                //function to show pass command history
+    
 	  if(history[0] == NULL){
 	  	printf("No history.\n");
 	  }else{
@@ -118,7 +118,7 @@ else if(strcmp(command[0], "list") == 0){
 		}
 	  }
   }
-  else if(strcmp(command[0], "printwd") == 0){
+  else if(strcmp(command[0], "printwd") == 0){             //function to show current directory
     // printf("wd");
 	pid_t pid;
         
@@ -135,7 +135,7 @@ else if(strcmp(command[0], "list") == 0){
                 wait(NULL);
                 }
   }
-  else if(strcmp(command[0], "gcc") == 0){
+  else if(strcmp(command[0], "gcc") == 0){            //function to complie program
     	pid_t pid;
         
         pid = fork();
@@ -151,7 +151,7 @@ else if(strcmp(command[0], "list") == 0){
                 wait(NULL);
                 }
   }
-  else if(strcmp(command[0], "./a.out") == 0){
+  else if(strcmp(command[0], "./a.out") == 0){     //function to run program
     //printf("run");
 	pid_t pid;
         
