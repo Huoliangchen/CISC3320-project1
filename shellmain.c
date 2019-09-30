@@ -38,8 +38,8 @@ int main()
 		printf("\033[0m$ ");
 	 
 		fgets(input, MAX, stdin);				//get input from user
-   		if(input[strlen(input) - 1] == '\n')			// try to get rid of "\n" that fgets keep.
-          	input[strlen(input) - 1] = '\0';
+   		if(input[strlen(input) - 1] == '\n')			//try to get rid of '\n' that fgets keep.
+          	input[strlen(input) - 1] = '\0';                        //and replace it with '\0'.
 	
     		if(input[0] != '\0' && input[0] != ' '){               //if input is not null or space, add to history
 		history[historycount] = strdup(input);
@@ -50,7 +50,7 @@ int main()
 		if (!command[0]) {				//if command is empty, skip it.
             		continue;
 		}
-        	execute(command, history, historycount);
+        	execute(command, history, historycount);        //execute the command if there is one.
 	}
 	
 	return 0;
@@ -60,7 +60,7 @@ char **commandSplit(char *input)
 {
 	int index = 0;
 	char **command = malloc(MAX * sizeof(input));
-	char *word;
+	char *word;                                          // a char array to store each word from the command temporarily.
 	
 	word = strtok(input, " ");
 	while(word != NULL)
