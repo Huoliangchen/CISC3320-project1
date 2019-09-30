@@ -13,7 +13,7 @@ This is the simple linux shell program. There are some simple function we can us
 4. use chdir to change to a given directory.
    (chdir pathofthefile.)
 
-5. use complie and ./a.out to complie and.run a program.
-   (complie example.c) complie file to an a.out file
+5. use gcc to complie and ./a.out to run a program.
+   (gcc example.c) complie file to an a.out file
    then use(./a.out) run the a.out we complie before.
  
