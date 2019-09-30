@@ -14,6 +14,6 @@ This is the simple linux shell program. There are some simple function we can us
    (chdir pathofthefile.)
 
 5. use complie and ./a.out to complie and.run a program.
-   use (complie example.c) complie file to an a.out file
+   (complie example.c) complie file to an a.out file
    then use(./a.out) run the a.out we complie before.
  
