@@ -119,7 +119,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
 	  }
   }
   else if(strcmp(command[0], "printwd") == 0){             //function to show current directory
-    // printf("wd");
+    
 	pid_t pid;
         
         pid = fork();
@@ -136,7 +136,8 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
                 }
   }
   else if(strcmp(command[0], "gcc") == 0){            //function to complie program
-    	pid_t pid;
+    
+	pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -152,7 +153,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
                 }
   }
   else if(strcmp(command[0], "./a.out") == 0){     //function to run program
-    //printf("run");
+    
 	pid_t pid;
         
         pid = fork();
