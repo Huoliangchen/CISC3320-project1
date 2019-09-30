@@ -9,7 +9,7 @@
 
 
 char **commandSplit(char []);           //function to split char into word.
-void execute(char **, char*[], int);    //function that the shell have
+void execute(char **, char*[], int);    //function that the shell execute command.
 
 int main()
 {
