@@ -11,7 +11,7 @@ This is the simple linux shell program. There are some simple function we can us
   (printwd)
 
 4. use chdir to change to a given directory.
-   (chdir pathofthefile.)
+   (chdir exampleOfPath)
 
 5. use gcc to complie and ./a.out to run a program.
    (gcc example.c) complie file to an a.out file
