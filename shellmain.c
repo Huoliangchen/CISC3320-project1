@@ -53,7 +53,7 @@ int main()
 		
         execute(command, history, historycount);   //execute the command if there is one.
 		
-		free(command);
+		
 	}
 	
 	return 0;
@@ -62,7 +62,7 @@ int main()
 char **commandSplit(char *input)
 {
 	int index = 0;
-	char **command = malloc(MAX * sizeof(input));
+	char **command;
 	char *word;                                          // a char array to store each word from the command temporarily.
 	
 	word = strtok(input, " ");
