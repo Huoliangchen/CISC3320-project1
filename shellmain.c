@@ -41,16 +41,18 @@ int main()
    		if(input[strlen(input) - 1] == '\n')			//try to get rid of '\n' that fgets keep.
           	input[strlen(input) - 1] = '\0';                        //and replace it with '\0'.
 	
-    		if(input[0] != '\0' && input[0] != ' '){               //if input is not null or space, add to history
-		history[historycount] = strdup(input);
-    		historycount++;
-    		}
-		
+	
 		command = commandSplit(input);			//change char arrry to a word array.
+		
 		if (!command[0]) {				//if command is empty, skip it.
             		continue;
 		}
-        	execute(command, history, historycount);        //execute the command if there is one.
+		               
+		history[historycount] = strdup(input);   // if there is a command, add to history
+    		historycount++;
+    		
+		
+        execute(command, history, historycount);   //execute the command if there is one.
 	}
 	
 	return 0;
