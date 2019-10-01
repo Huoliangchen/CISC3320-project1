@@ -17,7 +17,6 @@ int main()
 	char **command;
 	char *history[MAX];
 	int historycount = 0;
-	int status;
 	char path[MAX];
 	
 	printf("/**************************************************************/\n");     //print function command
@@ -30,7 +29,7 @@ int main()
 	printf("use command ./a.out to run.\n");
 	printf("/**************************************************************/\n");
 	
-	while(status)
+	while(1)
 	{	
 		getcwd(path, sizeof(path));                                         //show current working directory
 		printf("\033[1;32mMyshell>");
@@ -53,6 +52,8 @@ int main()
     		
 		
         execute(command, history, historycount);   //execute the command if there is one.
+		
+		free(command);
 	}
 	
 	return 0;
@@ -91,7 +92,7 @@ void execute(char **command, char *history[], int historycount)
   }
 else if(strcmp(command[0], "list") == 0){                  //function to list files or directories of a giving directroy.
    
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -122,7 +123,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
   }
   else if(strcmp(command[0], "printwd") == 0){             //function to show current directory
     
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -139,7 +140,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
   }
   else if(strcmp(command[0], "gcc") == 0){            //function to complie program
     
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -156,7 +157,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
   }
   else if(strcmp(command[0], "./a.out") == 0){     //function to run program
     
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
