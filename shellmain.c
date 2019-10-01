@@ -51,9 +51,9 @@ int main()
     		historycount++;
     		
 		
-        	execute(command, history, historycount);   //execute the command if there is one.
+        execute(command, history, historycount);		//execute the command if there is one.
 		
-		
+		free(command);
 	}
 	
 	return 0;
@@ -62,7 +62,7 @@ int main()
 char **commandSplit(char *input)
 {
 	int index = 0;
-	char **command;
+	char **command = malloc(MAX * sizeof(input));
 	char *word;                                          // a char array to store each word from the command temporarily.
 	
 	word = strtok(input, " ");
@@ -92,7 +92,7 @@ void execute(char **command, char *history[], int historycount)
   }
 else if(strcmp(command[0], "list") == 0){                  //function to list files or directories of a giving directroy.
    
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -123,7 +123,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
   }
   else if(strcmp(command[0], "printwd") == 0){             //function to show current directory
     
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -140,7 +140,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
   }
   else if(strcmp(command[0], "gcc") == 0){            //function to complie program
     
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
@@ -157,7 +157,7 @@ else if(strcmp(command[0], "list") == 0){                  //function to list fi
   }
   else if(strcmp(command[0], "./a.out") == 0){     //function to run program
     
-	pid_t pid;
+		pid_t pid;
         
         pid = fork();
         if(pid < 0){
