@@ -51,7 +51,7 @@ int main()
     		historycount++;
     		
 		
-        execute(command, history, historycount);   //execute the command if there is one.
+        	execute(command, history, historycount);   //execute the command if there is one.
 		
 		
 	}
