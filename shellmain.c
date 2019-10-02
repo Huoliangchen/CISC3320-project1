@@ -37,8 +37,8 @@ int main()
 		printf("\033[0m$ ");
 	 
 		fgets(input, MAX, stdin);				//get input from user
-   		if(input[strlen(input) - 1] == '\n')			//try to get rid of '\n' that fgets keep.
-          	input[strlen(input) - 1] = '\0';                        //and replace it with '\0'.
+   	//	if(input[strlen(input) - 1] == '\n')			//try to get rid of '\n' that fgets keep.
+        //  	input[strlen(input) - 1] = '\0';                        //and replace it with '\0'.
 	
 	
 		command = commandSplit(input);			//change char arrry to a word array.
@@ -65,12 +65,12 @@ char **commandSplit(char *input)
 	char **command = malloc(MAX * sizeof(input));
 	char *word;                                          // a char array to store each word from the command temporarily.
 	
-	word = strtok(input, " ");
+	word = strtok(input, " \t\r\n");
 	while(word != NULL)
 	{
 		command[index] = word;
 		index++;
-		word = strtok(NULL, " ");
+		word = strtok(NULL, " \t\r\n");
 		
 	}
 	
