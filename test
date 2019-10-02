@@ -1,144 +1,143 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#define MAX 50
+#include<stdio.h>
+#include<unistd.h>
+#include<string.h>
+#include<sys/wait.h>
+#include<sys/types.h>
+#include<stdlib.h>
+#include <sstream>
+#include <iostream>
+
+using namespace std;
+
+char* user_feed(void){
+	int status = 0;
+	char* user_input = NULL;
+	size_t buffer_size = 0;
+
+	status = getline(&user_input, &buffer_size, stdin);
+
+	if (status < 0){
+		printf("Unable to get input!\nTry again");
+		exit(status);
+	}
+	return user_input;
+}
 
 
-char **commandSplit(char []);
-void execute(char **);
+char** parser(char* str){
+  size_t buff = 100;
+	char** argv = (char**)malloc(sizeof(char*) * (buff));
+	char* arg;
+	int argv_position =0;
 
-int main()
-{
-	char input[MAX];
-	char **command;
+	if(!argv){
+		printf("Error!\n");exit(-1);
+	}
+
+	arg = strtok(str," \t\a\n\r");
+
+	while (arg != NULL){
+		argv[argv_position] = arg;
+		argv_position++;
+
+		if (argv_position >= buff){
+			printf("Exceeds size boundary!\n"); 	exit(-1);
+		}
+    
+		arg = strtok(NULL," \t\a\n\r");
+	}
+
+	argv[argv_position] = NULL;
+return argv;
+}
+
+int execute(char** str){
+	 pid_t pid, wpid;
+  	 int status;
+
+  	 pid = fork();
+  	 if(pid == 0){
+  	 	
+  	 	if(execvp(str[0], str) == -1 || pid<0)
+  	 		printf("Failed to launch.\n"); 
+	
+  	 	exit(1); 
+  	}
+
+  	 else{
+  	 	do{
+  	 		wpid = waitpid(pid, &status, WUNTRACED);
+  	 	}while (!WIFEXITED(status) && !WIFSIGNALED(status));
+           pid = -1;
+  	 }
+  	 return 1;	
+}
+
+int user_exit (char** args){
+  printf("Terminating shell!\n");
+	exit(0);
+}
+
+int pwd_like (char** argv){
+size_t buff_size = 100;
+char *buf=(char *)malloc(sizeof(char) * 100);
+	if (argv[1] != NULL){
+	   getcwd(buf,buff_size);
+     std::cout<<buf<<"\n";
+	}
+	return 1;
+}
+
+int change_directory (char** argv){
 	int status;
-	
-	while(status)
-	{	
-		printf("Myshell> ");
-		fgets(input, MAX, stdin);
-    if(input[strlen(input) - 1] == '\n')
-          input[strlen(input) - 1] = '\0';
-
-		command = commandSplit(input);
-    if (!command[0]) {
-            continue;
-        }
-        
-		execute(command);
+	if (argv[1] != NULL){
+		status = chdir(argv[1]);
+		if (status == -1)
+			printf("Check your path!\n");
 	}
-	
-	return 0;
+	return 1;
 }
 
-char **commandSplit(char *input)
+int exec_switch (char** args){
+
+	int status;
+	if (args[0] == NULL){
+		return 1;
+	}
+
+	else if (strcmp(args[0],"cd") == 0){
+		change_directory(args);
+		return 1;
+	}
+  
+ else if (strcmp(args[0],"pwd") == 0){
+		pwd_like(args);
+		return 1;
+	}
+
+	else if (strcmp(args[0], "exit") == 0){
+		user_exit(args);
+	}
+
+	status = execute(args);
+	return status;
+}
+
+
+int main(int argc, char const *argv[])
 {
-	int index = 0;
-	char **command = malloc(MAX * sizeof(input));
-	char *word;
-	
-	word = strtok(input, " ");
-	while(word != NULL)
-	{
-		command[index] = word;
-		index++;
-		word = strtok(NULL, " ");
-		
-	}
-	
-	command[index] = NULL;
-	
-	
-	return command;
-}
+	char** args;
+  char *line;
+  int status =1;
 
-void execute(char **command)
-{ 
-  if(strcmp(command[0], "chdir") == 0){
-    //printf("cd");
-	if(command[2] != NULL){
-		printf("too many arguments.\n");
-	}else if(chdir(command[1]) < 0){
-		perror(command[1]);
-	}
+	while(status){
+    printf("g5shell>");
+		line = user_feed();
+    if(line!=NULL){
+		args = parser(line);
+		status = exec_switch(args);
+    }
   }
-else if(strcmp(command[0], "list") == 0){
-   // printf("ls");
-	pid_t pid;
-        
-        pid = fork();
-        if(pid < 0){
-                printf("fork failed");
-        }
-        if(pid == 0){
-                if(execvp("ls", command) < 0){
-                        perror(command[0]);
-                        exit(1);
-                }
-        }else {
-                wait(NULL);
-                }
-
-  }
-  else if(strcmp(command[0], "history") == 0){
-    printf("his");
-  }
-  else if(strcmp(command[0], "printwd") == 0){
-    // printf("wd");
-	pid_t pid;
-        
-        pid = fork();
-        if(pid < 0){
-                printf("fork failed");
-        }
-        if(pid == 0){
-                if(execvp("pwd", command) < 0){
-                        perror(command[0]);
-                        exit(1);
-                }
-        }else {
-                wait(NULL);
-                }
-  }
-  else if(strcmp(command[0], "gcc") == 0){
-    	pid_t pid;
-        
-        pid = fork();
-        if(pid < 0){
-                printf("fork failed");
-        }
-        if(pid == 0){
-                if(execvp("gcc", command) < 0){
-                        perror(command[0]);
-                        exit(1);
-                }
-        }else {
-                wait(NULL);
-                }
-  }
-  else if(strcmp(command[0], "./a.out") == 0){
-    //printf("run");
-	pid_t pid;
-        
-        pid = fork();
-        if(pid < 0){
-                printf("fork failed");
-        }
-        if(pid == 0){
-                if(execl("./a.out", "a.out", NULL) < 0){
-                        perror(command[0]);
-                        exit(1);
-                }
-        }else {
-                wait(NULL);
-                }
-  }else if (strcmp(command[0], "exit") == 0){	
-	exit(0);	  
-  }else{
-    printf("command doese not exist.\n");
-  }
+  free(line);free(args);
+	return 0;
 }
